@@ -23,7 +23,9 @@ class GetStarted extends StatelessWidget {
     return Scaffold(
       body: Stack(
         children: const [
-          Center(child: Text('Hello there')),
+          Image(
+            image: AssetImage('picture/get01.jpg'),
+          ),
         ],
       ),
     );
