@@ -22,11 +22,30 @@ class GetStarted extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Stack(
-        children: const [
+        children:  [
           Image(
             image: AssetImage('picture/get01.jpg'),
           ),
+          
+            
+             Center(
+               child: Container(
+                color: Colors.amber,
+                child: Text('OKAY'),
+            ),
+             ),
+            Center(
+              child: Container(
+                color: Colors.red,
+                child: Text('OKAY'),
+              ),
+            ),
+            
+               
+          
         ],
+        
+        
       ),
     );
   }
