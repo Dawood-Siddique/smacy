@@ -244,7 +244,9 @@ class register_ extends State<register> {
                       padding: EdgeInsets.fromLTRB(0, 10, 25, 10)
                       
                       ),
-                  onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => loginform()));},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => loginform()));
+                    },
                   child: Text(
                     'Login',
                     style: TextStyle(
