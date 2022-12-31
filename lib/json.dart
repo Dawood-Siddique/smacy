@@ -18,11 +18,11 @@ class json_ extends State<json> {
       body: FutureBuilder(
         future: ReadJson(),
         builder: (context, data){
-          /*if (data.hasError) {
+          if (data.hasError) {
             return Center(
               child: Text('Error'),
             );
-          } else*/  if (data.hasData) {
+          } else  if (data.hasData) {
             var items = data.data as List<movie>;
             
             return ListView.builder(

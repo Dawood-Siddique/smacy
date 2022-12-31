@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:smacy/HomeScreen.dart';
 import 'package:smacy/Registratrion.dart';
+import 'package:smacy/bottomNavBar.dart';
+import 'package:smacy/json.dart';
 
 import 'main.dart';
 
@@ -133,7 +136,7 @@ class loginform_ extends State<loginform> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 padding: EdgeInsets.fromLTRB(148, 13, 148, 13)),
-            onPressed: () {},
+            onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => navBar()));},
             child: Text(
               'Login',
               style: TextStyle(
@@ -174,7 +177,20 @@ class loginform_ extends State<loginform> {
             )
           ],
         ),
+        ElevatedButton(
+          style: ElevatedButton.styleFrom(
+              primary: Color.fromRGBO(11, 26, 13, 1),
+              padding: EdgeInsets.fromLTRB(0, 10, 10, 10)),
+          onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => json()));},
+          child: Text(
+            'read json',
+            style: TextStyle(
+                color: Color.fromARGB(255, 127, 232, 28),
+                fontWeight: FontWeight.bold,fontFamily: 'Archivo',),
+          ),
+        ),
       ],
-    ))));
+    )
+    )));
   }
 }
