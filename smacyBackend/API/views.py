@@ -21,21 +21,26 @@ class userRegister(generics.CreateAPIView):
             if User.objects.filter(username=request.data.get('username')).exists():
                 return JsonResponse({'error': 'Username already exists'}, status=status.HTTP_400_BAD_REQUEST)
             elif User.objects.filter(email=request.data.get('email')).exists():
-                return JsonResponse({'error': 'Email already exists'}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({'Error': 'Email already exists'}, status=status.HTTP_400_BAD_REQUEST)
             else:
-                return JsonResponse({'error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+                return JsonResponse({'Error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
         except:
-            return JsonResponse({'error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+            return JsonResponse({'Error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
     
-class userLogin(generics.ListAPIView):
-    def get(self, request):
-        userName = User.objects.get(email=request.data.get('email')).username
-        password = request.data.get('password')
-        user = authenticate(username=userName, password=password)
-        if user:
-            return JsonResponse({'Success': 'User credentional fine'}, status = status.HTTP_200_OK,)
-        else:
-            return JsonResponse({'error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+class userLogin(generics.CreateAPIView):
+    def post(self, request):
+        try:
+            password = request.data.get('password')
+            userName= User.objects.get(email=request.data.get('email')).username
+            user = authenticate(username=userName, password=password)
+            if user:
+                return JsonResponse({'Success': 'User credentional fine'}, status = status.HTTP_200_OK,)
+            else:
+                return JsonResponse({'Error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+        except User.DoesNotExist:
+            return JsonResponse({'Error': 'Email Do not exsist'}, status=status.HTTP_404_NOT_FOUND)
+        except:
+            JsonResponse({'Error': 'Something Went Wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
 class moviePoster(generics.ListAPIView):
