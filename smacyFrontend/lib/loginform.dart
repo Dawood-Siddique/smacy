@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:smacy/Registratrion.dart';
 import 'package:http/http.dart' as http;
+import 'package:smacy/VideoPlayer.dart';
 import 'package:smacy/home.dart';
 import 'main.dart';
 
@@ -178,7 +179,7 @@ class loginform_ extends State<loginform> {
                     if (response.statusCode == 200) {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Home()),
+                        MaterialPageRoute(builder: (context) => Video()),
                       );
                     } else if (response.statusCode == 400) {
                       showDialog(
