@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:smacy/Registratrion.dart';
 import 'package:smacy/VideoPlayer.dart';
+import 'package:smacy/temp.dart';
 import 'loginform.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: const Video(),
+    home: const Install(),
     theme: ThemeData(
       scaffoldBackgroundColor: const Color.fromRGBO(11, 26, 13, 1),
       primaryColor: const Color.fromRGBO(173, 225, 0, 1),

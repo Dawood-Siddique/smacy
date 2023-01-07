@@ -179,7 +179,7 @@ class loginform_ extends State<loginform> {
                     if (response.statusCode == 200) {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Video()),
+                        MaterialPageRoute(builder: (context) => Home()),
                       );
                     } else if (response.statusCode == 400) {
                       showDialog(
