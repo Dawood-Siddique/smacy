@@ -6,7 +6,8 @@ import 'loginform.dart';
 
 void main() {
   runApp(MaterialApp(
-    home: const Install(),
+    debugShowCheckedModeBanner: false,
+    home: loginform(),
     theme: ThemeData(
       scaffoldBackgroundColor: const Color.fromRGBO(11, 26, 13, 1),
       primaryColor: const Color.fromRGBO(173, 225, 0, 1),
@@ -22,7 +23,6 @@ class GetStarted extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      
       body: Stack(
         children: [
           Container(
@@ -48,8 +48,7 @@ class GetStarted extends StatelessWidget {
             )),
           ),
           SingleChildScrollView(
-            
-          child:Column(
+              child: Column(
             children: [
               Container(
                 margin: EdgeInsets.fromLTRB(20, 500, 0, 0),
@@ -57,9 +56,11 @@ class GetStarted extends StatelessWidget {
                 child: Text(
                   'Watch Movies',
                   style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,fontFamily: 'Archivo',),
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                    fontFamily: 'Archivo',
+                  ),
                 ),
               ),
               SizedBox(
@@ -71,68 +72,70 @@ class GetStarted extends StatelessWidget {
                 child: Text(
                   'For Free',
                   style: TextStyle(
-                      color: Color.fromARGB(255, 127, 232, 28),
-                      fontWeight: FontWeight.bold,
-                      fontSize: 35,fontFamily: 'Archivo',),
+                    color: Color.fromARGB(255, 127, 232, 28),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 35,
+                    fontFamily: 'Archivo',
+                  ),
                 ),
               ),
             ],
           )),
           Center(
-            child:SingleChildScrollView(
-              
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: 600,
+              child: SingleChildScrollView(
+            child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
+              SizedBox(
+                height: 600,
+              ),
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    primary: Color.fromARGB(255, 127, 232, 28),
+                    elevation: 3,
+                    side: BorderSide(width: 1, color: Color.fromARGB(255, 127, 232, 28)),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                    padding: EdgeInsets.fromLTRB(140, 13, 140, 13)),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => register()));
+                },
+                child: Text(
+                  'Get Started',
+                  style: TextStyle(
+                    color: Colors.black,
+                    fontSize: 19,
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Archivo',
                   ),
-                  ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        primary: Color.fromARGB(255, 127, 232, 28),
-                        elevation: 3,
-                        side: BorderSide(
-                            width: 1, color: Color.fromARGB(255, 127, 232, 28)),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5)),
-                        padding: EdgeInsets.fromLTRB(140, 13, 140, 13)),
-                    onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => register()));},
-                    child: Text(
-                      'Get Started',
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 19,
-                          fontWeight: FontWeight.bold,fontFamily: 'Archivo',),
+                ),
+              ),
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.only(bottom: 80),
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.black,
+                      elevation: 3,
+                      side: BorderSide(width: 1, color: Color.fromARGB(255, 127, 232, 28)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                      padding: EdgeInsets.fromLTRB(165, 13, 165, 13)),
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => loginform()));
+                  },
+                  child: Text(
+                    'Login',
+                    style: TextStyle(
+                      color: Color.fromARGB(255, 127, 232, 28),
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                      fontFamily: 'Archivo',
                     ),
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 80),
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
-                          elevation: 3,
-                          side: BorderSide(
-                              width: 1,
-                              color: Color.fromARGB(255, 127, 232, 28)),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5)),
-                          padding: EdgeInsets.fromLTRB(165, 13, 165, 13)),
-                      onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => loginform()));},
-                      child: Text(
-                        'Login',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 127, 232, 28),
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold,fontFamily: 'Archivo',),
-                      ),
-                    ),
-                  ),
-                ]),
-          )
-      )],
+                ),
+              ),
+            ]),
+          ))
+        ],
       ),
     );
   }

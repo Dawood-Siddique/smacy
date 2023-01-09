@@ -8,12 +8,14 @@ import 'package:smacy/home.dart';
 import 'main.dart';
 
 class loginform extends StatefulWidget {
+  const loginform({super.key});
+
   @override
   loginform_ createState() => loginform_();
 }
 
 class loginform_ extends State<loginform> {
-  final _baseLoginUrl = 'http://127.0.0.1:8000/login/';
+  final _baseLoginUrl = 'http://10.0.2.2:8000/login/';
   final _emailTextController = TextEditingController();
   final _passwordTextController = TextEditingController();
   @override
@@ -108,7 +110,7 @@ class loginform_ extends State<loginform> {
                   height: 72,
                   child: TextField(
                     obscureText: true,
-                    keyboardType: TextInputType.none,
+                    keyboardType: TextInputType.visiblePassword,
                     controller: _passwordTextController,
                     decoration: InputDecoration(
                       prefixIcon: Icon(
@@ -175,11 +177,12 @@ class loginform_ extends State<loginform> {
                     // var stringUri = _baseLoginUrl + '?email=' + _emailTextController.text + '&password=' + _passwordTextController.text;
                     final newUri = Uri.parse(_baseLoginUrl);
                     var response = await http.post(newUri, body: qureyP);
-                    print(jsonDecode(response.body).keys.runtimeType);
-                    if (response.statusCode == 200) {
+                    var decodedJson = jsonDecode(response.body);
+                    if (response.statusCode == 200 || decodedJson.isNotEmpty) {
+                      var userId = decodedJson[decodedJson.keys.first];
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Home()),
+                        MaterialPageRoute(builder: (context) => Home(userId: userId,)),
                       );
                     } else if (response.statusCode == 400) {
                       showDialog(
@@ -193,7 +196,7 @@ class loginform_ extends State<loginform> {
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
-                                  child: Text('OK'),
+                                  child: const Text('OK'),
                                 ),
                               ],
                             );

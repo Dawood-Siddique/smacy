@@ -3,6 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:smacy/DownloadScreen.dart';
 import 'package:smacy/VideoPlayer.dart';
 
 void main() {
@@ -46,7 +47,7 @@ class _InstallState extends State<Install> {
         (_) {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const Video()),
+            MaterialPageRoute(builder: (context) => const DownloadScreen()),
           );
         },
       );
@@ -78,7 +79,7 @@ class _InstallState extends State<Install> {
     setState(() {
       loading = true;
     });
-    saveFile("https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4", "video.mp4");
+    saveFile("https://drive.google.com/uc?export=download&id=1tiyCTl2q4WWGiDj0iS2YGkUmqlK-pX1g","pic.jpeg");
     setState(() {
       loading = false;
     });

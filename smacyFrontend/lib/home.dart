@@ -1,8 +1,8 @@
-
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final int userId;
+  const Home({super.key, required this.userId});
 
   @override
   State<Home> createState() => _HomeState();
@@ -11,8 +11,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: const Text('Home'),
+    return Scaffold(
+      body: Center(child: Text('$widget.userId')),
     );
   }
 }

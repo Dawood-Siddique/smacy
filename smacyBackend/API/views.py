@@ -33,8 +33,9 @@ class userLogin(generics.CreateAPIView):
             password = request.data.get('password')
             userName= User.objects.get(email=request.data.get('email')).username
             user = authenticate(username=userName, password=password)
+            userId = User.objects.get(email = request.data.get('email')).id;
             if user:
-                return JsonResponse({'Success': 'User credentional fine'}, status = status.HTTP_200_OK,)
+                return JsonResponse({'UserId': userId}, status = status.HTTP_200_OK,)
             else:
                 return JsonResponse({'Error': 'Wrong Credentials'}, status=status.HTTP_400_BAD_REQUEST)
         except User.DoesNotExist:
