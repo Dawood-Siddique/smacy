@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'Search.dart';
+
 class homescreen extends StatefulWidget {
   @override
   homescreen_ createState() => homescreen_();
@@ -40,7 +42,10 @@ class homescreen_ extends State<homescreen> {
           ),
           backgroundColor: Colors.transparent,
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.search), onPressed: () {}),
+            IconButton(icon: Icon(Icons.search), onPressed: () {Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => search()),
+              );}),
             IconButton(onPressed: (){}, icon: Icon(Icons.menu))
           ],
              
