@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:convert';
 import 'dart:ui';
-import 'package:http/http.dart' as http;
-import 'package:flutter/services.dart';
 import 'package:smacy/downloadPage.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

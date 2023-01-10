@@ -52,6 +52,8 @@ class tempSeason(generics.ListAPIView):
     queryset = Season.objects.all()
     serializer_class = SeasonSerializer
 
+
+
 # @api_view(['GET', 'POST'])
 # def songList(request):
 #     if request.method == 'GET':

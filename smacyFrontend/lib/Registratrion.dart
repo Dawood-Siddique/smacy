@@ -163,7 +163,7 @@ class register_ extends State<register> {
                         color: Colors.black,
                       ),
                       enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.black),
+                        borderSide: const BorderSide(color: Colors.black),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       //labelText: 'Email',

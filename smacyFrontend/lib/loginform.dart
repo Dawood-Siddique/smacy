@@ -178,7 +178,7 @@ class loginform_ extends State<loginform> {
                     final newUri = Uri.parse(_baseLoginUrl);
                     var response = await http.post(newUri, body: qureyP);
                     var decodedJson = jsonDecode(response.body);
-                    if (response.statusCode == 200 || decodedJson.isNotEmpty) {
+                    if (response.statusCode == 200 && decodedJson.isNotEmpty) {
                       var userId = decodedJson[decodedJson.keys.first];
                       Navigator.push(
                         context,

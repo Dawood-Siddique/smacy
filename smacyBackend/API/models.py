@@ -9,7 +9,7 @@ class Movie(models.Model):
     ImbdRating = models.FloatField()
     AgeLimit = models.IntegerField()
     Genre = models.CharField(max_length=50)
-    Poster = models.ImageField(upload_to='images/')
+    Poster = models.URLField()
     def __str__(self):
         return self.MovieTitle
 
@@ -20,7 +20,7 @@ class Show(models.Model):
     ImbdRating = models.FloatField()
     AgeLimit = models.IntegerField()
     Genre = models.CharField(max_length=50)
-    Poster = models.ImageField(upload_to='images/')
+    Poster = models.URLField()
     def __str__(self):
         return self.ShowTitle
 
