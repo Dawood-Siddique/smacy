@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:smacy/DownloadScreen.dart';
-import 'package:smacy/VideoPlayer.dart';
 
 void main() {
   runApp(const MaterialApp(

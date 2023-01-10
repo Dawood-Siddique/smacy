@@ -12,7 +12,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(child: Text('$widget.userId')),
+      body: Center(child: Text(widget.userId.toString(),style: const TextStyle(color: Colors.white, fontSize: 24),)),
     );
   }
 }
