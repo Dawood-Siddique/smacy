@@ -2,7 +2,6 @@
 import 'package:flutter/material.dart';
 import 'package:smacy/Home.dart';
 
-import 'Home.dart';
 
 class navBar extends StatefulWidget {
   @override
