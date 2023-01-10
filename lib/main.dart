@@ -51,7 +51,7 @@ class GetStarted extends StatelessWidget {
           child:Column(
             children: [
               Container(
-                margin: EdgeInsets.fromLTRB(20, 500, 0, 0),
+                margin: EdgeInsets.fromLTRB(13, 530, 0, 0),
                 //color: Colors.amber,
                 child: Text(
                   'Watch Movies',
@@ -65,7 +65,7 @@ class GetStarted extends StatelessWidget {
                 height: 1,
               ),
               Container(
-                padding: EdgeInsets.fromLTRB(18, 0, 85, 0),
+                padding: EdgeInsets.fromLTRB(15, 0, 85, 0),
                 //color: Colors.red,
                 child: Text(
                   'For Free',
@@ -107,9 +107,8 @@ class GetStarted extends StatelessWidget {
                   SizedBox(
                     height: 10,
                   ),
-                  Container(
-                    margin: EdgeInsets.only(bottom: 80),
-                    child: ElevatedButton(
+                  
+                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           primary: Colors.black,
                           elevation: 3,
@@ -128,7 +127,7 @@ class GetStarted extends StatelessWidget {
                             fontWeight: FontWeight.bold,fontFamily: 'Archivo',),
                       ),
                     ),
-                  ),
+                  
                 ]),
           )
       )],

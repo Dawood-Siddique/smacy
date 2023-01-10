@@ -1,9 +1,9 @@
-
 import 'dart:convert';
 import 'dart:ui';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:smacy/downloadPage.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import 'Search.dart';
@@ -15,7 +15,7 @@ class homescreen extends StatefulWidget {
 
 class homescreen_ extends State<homescreen> {
   int currentindex = 0;
-  
+
   final controller = PageController();
   String Inkwell = "";
   @override
@@ -42,19 +42,20 @@ class homescreen_ extends State<homescreen> {
           ),
           backgroundColor: Colors.transparent,
           actions: <Widget>[
-            IconButton(icon: Icon(Icons.search), onPressed: () {Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => search()),
-              );}),
-            IconButton(onPressed: (){}, icon: Icon(Icons.menu))
+            IconButton(
+                icon: Icon(Icons.search),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => search()),
+                  );
+                }),
+            IconButton(onPressed: () {}, icon: Icon(Icons.menu))
           ],
-             
-          ),        
+        ),
         backgroundColor: Colors.black,
         resizeToAvoidBottomInset: false,
-       
-        body: 
-        SingleChildScrollView(
+        body: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: SizedBox(
               height: 1000,
@@ -151,7 +152,12 @@ class homescreen_ extends State<homescreen> {
                               customBorder: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(21),
                               ),
-                              onTap: () {},
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => downloadpage()));
+                              },
                               child: Ink.image(
                                 image: AssetImage('picture/noTime.jpg'),
                                 fit: BoxFit.cover,
