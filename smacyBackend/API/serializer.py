@@ -15,15 +15,20 @@ class MovieSerializer(serializers.ModelSerializer):
         model = Movie
         fields = '__all__'
 
-class UperHomeSerialzer(serializers.ModelSerializer):
+class MoviePoster(serializers.ModelSerializer):
     class Meta:
-        models = Movie
+        model = Movie
         fields = ['id', 'Poster']
+
 
 class ShowSerializer(serializers.ModelSerializer):
     class Meta:
         model = Show
         fields = '__all__'
+class ShowPoster(serializers.ModelSerializer):
+    class Meta:
+        model = Show
+        fields = ['id', 'Poster']
 
 class SeasonSerializer(serializers.ModelSerializer):
     class Meta:
