@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors, camel_case_types, use_key_in_widget_constructors, annotate_overrides, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'package:smacy/bottomNavBar.dart';
 
 class search extends StatefulWidget {
@@ -23,12 +24,9 @@ class search_ extends State<search> {
                 children: [
                   Container(
                     child: IconButton(
-                      icon: Icon(Icons.arrow_back_ios, color: Colors.white),
+                      icon: Icon(MdiIcons.arrowLeft, color: Colors.white),
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => navBar()),
-                        );
+                        Navigator.pop(context);
                       },
                     ),
                   ),
@@ -42,10 +40,9 @@ class search_ extends State<search> {
                           //textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
                             prefixIcon: Icon(
-                              Icons.search,
+                              MdiIcons.searchWeb,
                               color: Colors.grey[700],
                             ),
-
                             enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: Colors.black),
                               borderRadius: BorderRadius.circular(5.0),
@@ -66,7 +63,7 @@ class search_ extends State<search> {
                 // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text(
-                    "Genres",
+                    "Genre",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,

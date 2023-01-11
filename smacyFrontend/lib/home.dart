@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
@@ -6,12 +8,9 @@ import 'package:material_design_icons_flutter/material_design_icons_flutter.dart
 import 'dart:ui';
 import 'package:smacy/MovieScreen.dart';
 import 'package:smacy/widget/poster.dart';
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
-import 'Search.dart';
 import 'models/movie_model.dart';
 import 'package:http/http.dart' as http;
-import 'MovieScreen.dart';
 
 void main(List<String> args) {
   runApp(
@@ -40,11 +39,6 @@ class _HomeState extends State<Home> {
   @override
   void initState() {
     // 1
-    posterList.add("picture/notime.jpeg");
-    posterList.add("picture/notime.jpeg");
-    posterList.add("picture/notime.jpeg");
-    posterList.add("picture/notime.jpeg");
-    posterList.add("picture/notime.jpeg");
 
     getBaseUrl();
 
@@ -90,6 +84,7 @@ class _HomeState extends State<Home> {
   List imageList = [
     "picture/notime.jpeg",
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

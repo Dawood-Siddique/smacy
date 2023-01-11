@@ -18,7 +18,7 @@ class _PosterState extends State<Poster> {
       height: 160,
       width: 115,
       decoration: BoxDecoration(
-        color: Colors.white,
+        //color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
       child: CachedNetworkImage(

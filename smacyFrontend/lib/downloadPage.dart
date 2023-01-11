@@ -1,6 +1,7 @@
 // ignore_for_file: camel_case_types, use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class DownloadPage extends StatefulWidget {
   final int movieId;
@@ -24,7 +25,7 @@ class _DownloadPageState extends State<DownloadPage> {
         ),
         backgroundColor: Colors.black,
         body: SafeArea(
-          child: Stack(children: [
+          child: Column(children: [
             Container(
               height: 200,
               margin: EdgeInsets.only(top: 10),
@@ -121,7 +122,7 @@ class _DownloadPageState extends State<DownloadPage> {
                           width: 17,
                         ),
                         Icon(
-                          Icons.play_arrow,
+                          MdiIcons.play,
                           color: Colors.black,
                           size: 20,
                         ),
@@ -156,7 +157,7 @@ class _DownloadPageState extends State<DownloadPage> {
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Icon(
-                        Icons.download,
+                        MdiIcons.download,
                         color: Colors.black,
                         size: 20,
                       ),

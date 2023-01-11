@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 import 'home.dart';
 
@@ -35,7 +36,8 @@ class _DownloadPageState extends State<DownloadPage> {
   double ImdbRating = 0.0;
   int AgeLimit = 0;
   String Genre = "";
-  String ImageUrl = "https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2344&q=80";
+  String ImageUrl =
+      "https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2344&q=80";
 
   @override
   void initState() {
@@ -65,7 +67,8 @@ class _DownloadPageState extends State<DownloadPage> {
       ImageUrl = decodedJson['Poster'];
       setState(() {});
     } else {
-      dialog(decodedJson.keys.first, decodedJson.values.first, response.statusCode);
+      dialog(decodedJson.keys.first, decodedJson.values.first,
+          response.statusCode);
     }
   }
 
@@ -88,7 +91,10 @@ class _DownloadPageState extends State<DownloadPage> {
               TextButton(
                 child: const Text("OK"),
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Home(userId: widget.userId)));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => Home(userId: widget.userId)));
                 },
               )
             ],
@@ -100,7 +106,7 @@ class _DownloadPageState extends State<DownloadPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          leading: BackButton(color: Colors.white),
+          leading: Icon(MdiIcons.arrowLeft),
           backgroundColor: Colors.transparent,
           elevation: 0.0,
         ),
@@ -140,7 +146,11 @@ class _DownloadPageState extends State<DownloadPage> {
                   // padding: EdgeInsets.only(left: 10),
                   child: Text(
                     MovieTitle,
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'Archivo'),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 30,
+                        fontFamily: 'Archivo'),
                   ),
                 ),
                 SizedBox(
@@ -191,18 +201,20 @@ class _DownloadPageState extends State<DownloadPage> {
                       side: BorderSide(
                         width: 1,
                       ),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
                       padding: EdgeInsets.fromLTRB(140, 10, 140, 10)),
-                  onPressed: () {
-                    
-                  },
+                  onPressed: () {},
                   child: Row(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
                       Icon(
-                        Icons.download,
+                        MdiIcons.download,
                         color: Colors.black,
                         size: 20,
+                      ),
+                      SizedBox(
+                        width: 10,
                       ),
                       Text(
                         'Download',
@@ -223,7 +235,10 @@ class _DownloadPageState extends State<DownloadPage> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     Description,
-                    style: TextStyle(color: Colors.white, fontSize: 12.4, fontWeight: FontWeight.w300),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 12.4,
+                        fontWeight: FontWeight.w300),
                   ),
                 ),
                 SizedBox(height: 10),
@@ -233,7 +248,10 @@ class _DownloadPageState extends State<DownloadPage> {
                     children: [
                       Text(
                         "Cast: Daniel Craig,Rami...",
-                        style: TextStyle(color: Colors.grey[400], fontSize: 15.4, fontWeight: FontWeight.w400),
+                        style: TextStyle(
+                            color: Colors.grey[400],
+                            fontSize: 15.4,
+                            fontWeight: FontWeight.w400),
                       ),
                     ],
                   ),
