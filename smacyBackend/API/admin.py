@@ -13,4 +13,6 @@ admin.site.register(MovieCast)
 admin.site.register(ShowCast)
 admin.site.register(MovieDownloadLink)
 admin.site.register(EpisodeDownloadLink)
+admin.site.register(UserMovieDownloaded)
+
 

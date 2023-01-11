@@ -1,28 +1,43 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:http/http.dart' as http;
 
-void main() {
-  runApp(const MaterialApp(
-    home: DownloadScreen(),
-  ));
-}
 
 class DownloadScreen extends StatefulWidget {
-  const DownloadScreen({super.key});
+  int userId;
+  DownloadScreen({super.key, required this.userId});
 
   @override
   State<DownloadScreen> createState() => _DownloadScreenState();
 }
 
 class _DownloadScreenState extends State<DownloadScreen> {
+  void initState() {
+    // 1st
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Download'),
       ),
-      body: Column(children: const [DownloadMovie(movieName: 'first'), DownloadMovie(movieName: '2nd'), DownloadMovie(movieName: '3rd')]),
+      body: ListView.separated(
+        padding: const EdgeInsets.all(8.0),
+        scrollDirection: Axis.vertical,
+        itemCount: 10,
+        itemBuilder: (BuildContext context, int index) {
+          return DownloadMovie(
+
+          )
+        },
+        separatorBuilder: (BuildContext context, int index) {
+          return SizedBox(
+            width: 12,
+          );
+        },
+      ),
       backgroundColor: const Color.fromRGBO(11, 26, 13, 1),
     );
   }
@@ -62,8 +77,7 @@ class _DownloadMovieState extends State<DownloadMovie> {
 
   Future<void> loadDownloaded() async {
     //2nd method
-    final localPosterPath = await downloadPosterPath("pic.jpeg");
-    print(widget.movieName);
+    final localPosterPath = await downloadPosterPath(widget.movieName);
     file = File(localPosterPath);
     setState(() {
       poster = Image.file(

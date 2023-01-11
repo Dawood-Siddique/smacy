@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:smacy/DownloadScreen.dart';
 
 import 'home.dart';
 
@@ -194,7 +195,13 @@ class _DownloadPageState extends State<DownloadPage> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                       padding: EdgeInsets.fromLTRB(140, 10, 140, 10)),
                   onPressed: () {
-                    
+                    // Download Video
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => DownloadScreen(
+                                  userId: widget.userId, 
+                                )));
                   },
                   child: Row(
                     // ignore: prefer_const_literals_to_create_immutables

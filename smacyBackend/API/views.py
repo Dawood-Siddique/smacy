@@ -60,9 +60,16 @@ class movieDetail(generics.RetrieveAPIView):
     queryset = Movie.objects.all()
     serializer_class = MovieSerializer
     lookup_field = 'id'
-            
-        
 
+class UserDownloadedMovieSave(generics.CreateAPIView):
+    def post(self, request):
+        try:
+            serializer = UserDownloadMovieSerializer(data=request.data) 
+            if serializer.is_valid():
+                serializer.save()
+                return JsonResponse({'Success': 'User Downloaded Movie Saved'}, status=status.HTTP_201_CREATED)
+        except:
+            return JsonResponse({'Error': 'Something Went Wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 # @api_view(['GET', 'POST'])
 # def songList(request):

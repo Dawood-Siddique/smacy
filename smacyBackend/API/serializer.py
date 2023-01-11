@@ -64,3 +64,8 @@ class EpisodeDownloadLinkSerializer(serializers.ModelSerializer):
     class Meta:
         model = EpisodeDownloadLink
         fields = '__all__'
+
+class UserDownloadMovieSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserMovieDownloaded
+        fields = ['MovieId', 'UserId']

@@ -5,14 +5,11 @@ import 'package:path_provider/path_provider.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:smacy/DownloadScreen.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    home: Install(),
-  ));
-}
 
 class Install extends StatefulWidget {
-  const Install({super.key});
+  String downloadLink;
+  String fileName;
+  Install({super.key, required this.downloadLink, required this.fileName});
 
   @override
   State<Install> createState() => _InstallState();
@@ -32,7 +29,6 @@ class _InstallState extends State<Install> {
       if (Platform.isAndroid) {
         if (await _requestPermission(Permission.storage)) {
           directory = (await getExternalStorageDirectory())!;
-          print(directory.path);
         } else {}
       } else {}
       // done with platform if statement now time to save file
@@ -52,7 +48,6 @@ class _InstallState extends State<Install> {
       );
       return true;
     } catch (e) {
-      print(e);
       return false;
     }
   }
@@ -78,7 +73,7 @@ class _InstallState extends State<Install> {
     setState(() {
       loading = true;
     });
-    saveFile("https://drive.google.com/uc?export=download&id=1tiyCTl2q4WWGiDj0iS2YGkUmqlK-pX1g","pic.jpeg");
+    saveFile(widget.downloadLink, widget.fileName);
     setState(() {
       loading = false;
     });
