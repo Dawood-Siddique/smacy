@@ -1,11 +1,11 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../downloadPage.dart';
+import '../MovieScreen.dart';
 
 class Poster extends StatefulWidget {
   final String poster;
-  final int id;
-  const Poster({super.key, required this.poster, required this.id});
+  const Poster({super.key, required this.poster});
 
   @override
   State<Poster> createState() => _PosterState();
@@ -21,9 +21,11 @@ class _PosterState extends State<Poster> {
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
       ),
-      child: Image.asset(
-        widget.poster,
+      child: CachedNetworkImage(
+        imageUrl: widget.poster,
         fit: BoxFit.cover,
+        placeholder: (context, url) => CircularProgressIndicator(),
+        errorWidget: (context, url, error) => Icon(Icons.error),
       ),
     );
   }

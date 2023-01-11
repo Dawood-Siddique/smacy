@@ -1,13 +1,16 @@
 import 'dart:convert';
-
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+
+import 'home.dart';
 
 void main(List<String> args) {
   runApp(
     MaterialApp(
       home: DownloadPage(
         movieId: 2,
+        userId: 26,
       ),
     ),
   );
@@ -15,7 +18,8 @@ void main(List<String> args) {
 
 class DownloadPage extends StatefulWidget {
   final int movieId;
-  const DownloadPage({super.key, required this.movieId});
+  final int userId;
+  const DownloadPage({super.key, required this.movieId, required this.userId});
   @override
   State<DownloadPage> createState() => _DownloadPageState();
 }
@@ -31,14 +35,13 @@ class _DownloadPageState extends State<DownloadPage> {
   double ImdbRating = 0.0;
   int AgeLimit = 0;
   String Genre = "";
-  String ImageUrl = "https://drive.google.com/uc?export=download&id=1eqNSloPW5eTMVjAsssviLxjndHvaUzU1";
-  late NetworkImage NetworkFetchedImage;
+  String ImageUrl = "https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2344&q=80";
+
   @override
   void initState() {
     // 1
     getUrl(widget.movieId);
     getMovieDetail();
-    fetchImage();
     super.initState();
   }
 
@@ -52,17 +55,17 @@ class _DownloadPageState extends State<DownloadPage> {
     final response = await http.get(Uri.parse(baseUrl));
     var decodedJson = jsonDecode(response.body);
     if (response.statusCode == 200 && decodedJson.isNotEmpty) {
-        MovieTitle = decodedJson['MovieTitle'];
-        ReleaseDate = decodedJson['ReleaseDate'];
-        Duration = mintToHour(decodedJson['Duration']);
-        Description = decodedJson['Description'];
-        ImdbRating = decodedJson['ImbdRating'];
-        AgeLimit = decodedJson['AgeLimit'];
-        Genre = decodedJson['Genre'];
-        ImageUrl = decodedJson['Poster'];
-      print(decodedJson);
+      MovieTitle = decodedJson['MovieTitle'];
+      ReleaseDate = decodedJson['ReleaseDate'];
+      Duration = mintToHour(decodedJson['Duration']);
+      Description = decodedJson['Description'];
+      ImdbRating = decodedJson['ImbdRating'];
+      AgeLimit = decodedJson['AgeLimit'];
+      Genre = decodedJson['Genre'];
+      ImageUrl = decodedJson['Poster'];
+      setState(() {});
     } else {
-      _dialog(decodedJson.keys.first, decodedJson.values.first, response.statusCode);
+      dialog(decodedJson.keys.first, decodedJson.values.first, response.statusCode);
     }
   }
 
@@ -73,7 +76,7 @@ class _DownloadPageState extends State<DownloadPage> {
     return "${hour}h ${min}m";
   }
 
-  void _dialog(String title, String content, int statusCode) {
+  void dialog(String title, String content, int statusCode) {
     // 3b
     showDialog(
         context: context,
@@ -85,19 +88,12 @@ class _DownloadPageState extends State<DownloadPage> {
               TextButton(
                 child: const Text("OK"),
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Home(userId: widget.userId)));
                 },
               )
             ],
           );
         });
-  }
-
-  void fetchImage() {
-    // 4
-    setState(() {
-      NetworkFetchedImage = NetworkImage(ImageUrl);
-    });
   }
 
   @override
@@ -114,11 +110,12 @@ class _DownloadPageState extends State<DownloadPage> {
             Container(
               height: 200,
               margin: EdgeInsets.only(top: 10),
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkFetchedImage,
-                  fit: BoxFit.cover,
-                ),
+              width: MediaQuery.of(context).size.width,
+              child: CachedNetworkImage(
+                imageUrl: ImageUrl,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => CircularProgressIndicator(),
+                errorWidget: (context, url, error) => Icon(Icons.error),
               ),
             ),
             Container(
@@ -139,8 +136,8 @@ class _DownloadPageState extends State<DownloadPage> {
             Column(
               children: [
                 Container(
-                  margin: EdgeInsets.fromLTRB(0, 220, 0, 0),
-                  padding: EdgeInsets.only(right: 170),
+                  margin: EdgeInsets.fromLTRB(0, 220, 145, 0),
+                  // padding: EdgeInsets.only(left: 10),
                   child: Text(
                     MovieTitle,
                     style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'Archivo'),
@@ -196,7 +193,9 @@ class _DownloadPageState extends State<DownloadPage> {
                       ),
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                       padding: EdgeInsets.fromLTRB(140, 10, 140, 10)),
-                  onPressed: () {},
+                  onPressed: () {
+                    
+                  },
                   child: Row(
                     // ignore: prefer_const_literals_to_create_immutables
                     children: [
@@ -229,48 +228,16 @@ class _DownloadPageState extends State<DownloadPage> {
                 ),
                 SizedBox(height: 10),
                 Container(
-                  padding: EdgeInsets.only(right: 150),
+                  padding: EdgeInsets.all(8.8),
                   child: Row(
                     children: [
                       Text(
                         "Cast: Daniel Craig,Rami...",
                         style: TextStyle(color: Colors.grey[400], fontSize: 15.4, fontWeight: FontWeight.w400),
                       ),
-                      OutlinedButton(
-                          style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
-                            padding: EdgeInsets.fromLTRB(0, 10, 25, 10),
-                            side: BorderSide(color: Colors.transparent),
-                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                          ),
-                          onPressed: () {
-                            setState(() {
-                              isVisible = !isVisible;
-                              text = !text;
-                            });
-                          },
-                          child: Text(
-                            text ? "less" : "more",
-                            style: TextStyle(color: Colors.grey),
-                          )),
                     ],
                   ),
                 ),
-                Visibility(
-                  visible: isVisible,
-                  child: Container(
-                      child: Text(
-                    "Naomie Harris",
-                    style: TextStyle(color: Colors.white),
-                  )),
-                ),
-                SizedBox(height: 5),
-                Container(
-                    padding: EdgeInsets.only(right: 200),
-                    child: Text(
-                      "Director: Cary Joji Fukunaga",
-                      style: TextStyle(color: Colors.grey[400], fontSize: 15.4, fontWeight: FontWeight.w400),
-                    )),
               ],
             )
           ]),
