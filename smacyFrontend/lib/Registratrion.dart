@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, camel_case_types, prefer_final_fields, avoid_unnecessary_containers, use_key_in_widget_constructors
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -32,7 +34,7 @@ class register_ extends State<register> {
                   if (statusCode == 201) {
                     Navigator.push(
                       context,
-                        MaterialPageRoute(builder: (context) => loginform()),
+                      MaterialPageRoute(builder: (context) => loginform()),
                     );
                   } else {
                     Navigator.of(context).pop();
@@ -58,7 +60,8 @@ class register_ extends State<register> {
     var response = await http.post(uri, body: qurey);
     var decodedJson = jsonDecode(response.body);
     if (decodedJson.isNotEmpty) {
-      dialog(decodedJson.keys.first, decodedJson[decodedJson.keys.first], response.statusCode);
+      dialog(decodedJson.keys.first, decodedJson[decodedJson.keys.first],
+          response.statusCode);
     } else {
       dialog("Error", "Something went Wrong", 400);
     }
@@ -264,7 +267,11 @@ class register_ extends State<register> {
                   padding: EdgeInsets.only(right: 32),
                   child: Text(
                     "By registering, you accept our terms and conditions",
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontFamily: 'Archivo', fontSize: 12.5),
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Archivo',
+                        fontSize: 12.5),
                   ),
                 ),
               ),
@@ -275,10 +282,12 @@ class register_ extends State<register> {
             Container(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 127, 232, 28),
+                    backgroundColor: Color.fromARGB(255, 127, 232, 28),
                     elevation: 3,
-                    side: BorderSide(width: 1, color: Color.fromARGB(255, 127, 232, 28)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    side: BorderSide(
+                        width: 1, color: Color.fromARGB(255, 127, 232, 28)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     padding: EdgeInsets.fromLTRB(138, 13, 138, 13)),
                 onPressed: () {
                   _register();
@@ -313,9 +322,14 @@ class register_ extends State<register> {
                 Row(
                   children: [
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Color.fromRGBO(11, 26, 13, 1), padding: EdgeInsets.fromLTRB(0, 10, 25, 10)),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(11, 26, 13, 1),
+                          padding: EdgeInsets.fromLTRB(0, 10, 25, 10)),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => loginform()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => loginform()));
                       },
                       child: Text(
                         'Login',

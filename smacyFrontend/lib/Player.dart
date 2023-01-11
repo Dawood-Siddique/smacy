@@ -1,7 +1,10 @@
+// ignore_for_file: unused_element, prefer_const_constructors
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
+
 class VideoPlayer extends StatefulWidget {
   const VideoPlayer({super.key});
 
@@ -50,10 +53,9 @@ class _VideoPlayerState extends State<VideoPlayer> {
     }
   }
 
-  // Widgets 
+  // Widgets
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-
-    );
-  }}
+    return Scaffold();
+  }
+}

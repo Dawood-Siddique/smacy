@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, camel_case_types, use_key_in_widget_constructors, annotate_overrides, avoid_unnecessary_containers
+
 import 'package:flutter/material.dart';
 import 'package:smacy/bottomNavBar.dart';
 
@@ -61,6 +63,7 @@ class search_ extends State<search> {
               ),
               SizedBox(height: 10),
               Row(
+                // ignore: prefer_const_literals_to_create_immutables
                 children: [
                   Text(
                     "Genres",
@@ -80,7 +83,7 @@ class search_ extends State<search> {
                 children: [
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[900],
+                        backgroundColor: Colors.grey[900],
                         elevation: 3,
                         side: BorderSide(
                           width: 1,
@@ -98,7 +101,7 @@ class search_ extends State<search> {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[900],
+                        backgroundColor: Colors.grey[900],
                         elevation: 3,
                         side: BorderSide(
                           width: 1,
@@ -116,7 +119,7 @@ class search_ extends State<search> {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[900],
+                        backgroundColor: Colors.grey[900],
                         elevation: 3,
                         side: BorderSide(
                           width: 1,
@@ -135,7 +138,7 @@ class search_ extends State<search> {
                 children: [
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[900],
+                        backgroundColor: Colors.grey[900],
                         elevation: 3,
                         side: BorderSide(
                           width: 1,
@@ -153,7 +156,7 @@ class search_ extends State<search> {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[900],
+                        backgroundColor: Colors.grey[900],
                         elevation: 3,
                         side: BorderSide(
                           width: 1,
@@ -171,7 +174,7 @@ class search_ extends State<search> {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[900],
+                        backgroundColor: Colors.grey[900],
                         elevation: 3,
                         side: BorderSide(
                           width: 1,
@@ -189,7 +192,7 @@ class search_ extends State<search> {
                   ),
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        primary: Colors.grey[900],
+                        backgroundColor: Colors.grey[900],
                         elevation: 3,
                         side: BorderSide(
                           width: 1,
@@ -211,7 +214,7 @@ class search_ extends State<search> {
                     children: [
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.grey[900],
+                            backgroundColor: Colors.grey[900],
                             elevation: 3,
                             side: BorderSide(
                               width: 1,
@@ -229,7 +232,7 @@ class search_ extends State<search> {
                       ),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.grey[900],
+                            backgroundColor: Colors.grey[900],
                             elevation: 3,
                             side: BorderSide(
                               width: 1,
@@ -247,7 +250,7 @@ class search_ extends State<search> {
                       ),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.grey[900],
+                            backgroundColor: Colors.grey[900],
                             elevation: 3,
                             side: BorderSide(
                               width: 1,
@@ -265,7 +268,7 @@ class search_ extends State<search> {
                       ),
                       ElevatedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.grey[900],
+                            backgroundColor: Colors.grey[900],
                             elevation: 3,
                             side: BorderSide(
                               width: 1,
@@ -284,7 +287,7 @@ class search_ extends State<search> {
               ),
               ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.grey[900],
+                    backgroundColor: Colors.grey[900],
                     elevation: 3,
                     side: BorderSide(
                       width: 1,

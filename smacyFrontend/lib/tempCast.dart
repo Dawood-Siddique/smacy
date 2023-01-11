@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors, camel_case_types, unused_local_variable
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -46,7 +48,6 @@ class _castState extends State<cast> {
   Future<void> apiCall() async {
     final baseUri = Uri.parse(baseURL);
     final response = await http.get(baseUri);
-
   }
 
   @override

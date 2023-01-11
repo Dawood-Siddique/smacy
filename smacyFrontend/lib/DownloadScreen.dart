@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,7 +24,11 @@ class _DownloadScreenState extends State<DownloadScreen> {
       appBar: AppBar(
         title: const Text('Download'),
       ),
-      body: Column(children: const [DownloadMovie(movieName: 'first'), DownloadMovie(movieName: '2nd'), DownloadMovie(movieName: '3rd')]),
+      body: Column(children: const [
+        DownloadMovie(movieName: 'first'),
+        DownloadMovie(movieName: '2nd'),
+        DownloadMovie(movieName: '3rd')
+      ]),
       backgroundColor: const Color.fromRGBO(11, 26, 13, 1),
     );
   }
@@ -113,7 +119,9 @@ class _DownloadMovieState extends State<DownloadMovie> {
                   padding: EdgeInsets.all(8.0),
                   child: Text(
                     "movieId",
-                    style: TextStyle(color: Color.fromARGB(255, 198, 198, 198), fontSize: 12),
+                    style: TextStyle(
+                        color: Color.fromARGB(255, 198, 198, 198),
+                        fontSize: 12),
                     textAlign: TextAlign.left,
                   ),
                 ),

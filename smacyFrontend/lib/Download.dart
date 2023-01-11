@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers, camel_case_types, prefer_const_constructors
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
@@ -24,7 +26,8 @@ class _DownloadState extends State<Download> {
   @override
   Widget build(BuildContext context) {
     return Container(child: FloatingActionButton(onPressed: () {
-      showDialog(context: context, builder: (context) => const downloadDialog());
+      showDialog(
+          context: context, builder: (context) => const downloadDialog());
     }));
   }
 }
@@ -40,9 +43,11 @@ class _downloadDialogState extends State<downloadDialog> {
   Dio dio = Dio();
   double progress = 0.0;
   void startDownloading() async {
-    const String url = 'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
+    const String url =
+        'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4';
     const String fileName = "video.mp4";
     String path = await _getFilePath(fileName);
+    // ignore: avoid_print
     print(path);
     await dio.download(
       url,
@@ -54,7 +59,7 @@ class _downloadDialogState extends State<downloadDialog> {
       },
       deleteOnError: true,
     ).then((_) {
-        Navigator.push(
+      Navigator.push(
         context,
         MaterialPageRoute(builder: (context) => Video()),
       );

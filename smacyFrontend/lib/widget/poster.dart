@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../downloadPage.dart';
-
 class Poster extends StatefulWidget {
   final String poster;
   final int id;

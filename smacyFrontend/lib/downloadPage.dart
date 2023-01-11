@@ -1,4 +1,4 @@
-// ignore_for_file: camel_case_types, use_key_in_widget_constructors, prefer_const_constructors
+// ignore_for_file: camel_case_types, use_key_in_widget_constructors, prefer_const_constructors, avoid_unnecessary_containers
 
 import 'package:flutter/material.dart';
 
@@ -199,7 +199,7 @@ class _DownloadPageState extends State<DownloadPage> {
                       ),
                       OutlinedButton(
                           style: ElevatedButton.styleFrom(
-                            primary: Colors.black,
+                            backgroundColor: Colors.black,
                             padding: EdgeInsets.fromLTRB(0, 10, 25, 10),
                             side: BorderSide(color: Colors.transparent),
                             shape: RoundedRectangleBorder(

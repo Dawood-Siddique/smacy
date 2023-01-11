@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -38,7 +40,8 @@ class _InstallState extends State<Install> {
       // done with platform if statement now time to save file
       var filePath = "${directory!.path}/$fileName";
       File saveFile = File(filePath);
-      await dio.download(url, saveFile.path, onReceiveProgress: (recivedBytes, totalBytes) {
+      await dio.download(url, saveFile.path,
+          onReceiveProgress: (recivedBytes, totalBytes) {
         setState(() {
           progress = recivedBytes / totalBytes;
         });
@@ -78,7 +81,9 @@ class _InstallState extends State<Install> {
     setState(() {
       loading = true;
     });
-    saveFile("https://drive.google.com/uc?export=download&id=1tiyCTl2q4WWGiDj0iS2YGkUmqlK-pX1g","pic.jpeg");
+    saveFile(
+        "https://drive.google.com/uc?export=download&id=1tiyCTl2q4WWGiDj0iS2YGkUmqlK-pX1g",
+        "pic.jpeg");
     setState(() {
       loading = false;
     });

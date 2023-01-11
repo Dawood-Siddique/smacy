@@ -1,9 +1,10 @@
+// ignore_for_file: camel_case_types, prefer_const_constructors, avoid_unnecessary_containers
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:smacy/Registratrion.dart';
 import 'package:http/http.dart' as http;
-import 'package:smacy/VideoPlayer.dart';
 import 'package:smacy/home.dart';
 import 'main.dart';
 
@@ -146,13 +147,16 @@ class loginform_ extends State<loginform> {
             Container(
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 127, 232, 28),
+                    backgroundColor: Color.fromARGB(255, 127, 232, 28),
                     elevation: 3,
-                    side: BorderSide(width: 1, color: Color.fromARGB(255, 127, 232, 28)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                    side: BorderSide(
+                        width: 1, color: Color.fromARGB(255, 127, 232, 28)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)),
                     padding: EdgeInsets.fromLTRB(148, 13, 148, 13)),
                 onPressed: () async {
-                  if (_emailTextController.text.isEmpty || _passwordTextController.text.isEmpty) {
+                  if (_emailTextController.text.isEmpty ||
+                      _passwordTextController.text.isEmpty) {
                     showDialog(
                         context: context,
                         builder: (context) {
@@ -182,7 +186,10 @@ class loginform_ extends State<loginform> {
                       var userId = decodedJson[decodedJson.keys.first];
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Home(userId: userId,)),
+                        MaterialPageRoute(
+                            builder: (context) => Home(
+                                  userId: userId,
+                                )),
                       );
                     } else if (response.statusCode == 400) {
                       showDialog(
@@ -207,7 +214,8 @@ class loginform_ extends State<loginform> {
                           builder: ((context) {
                             return AlertDialog(
                               title: const Text('Error'),
-                              content: const Text('No email Exist, Please Register'),
+                              content:
+                                  const Text('No email Exist, Please Register'),
                               actions: [
                                 TextButton(
                                   onPressed: () {
@@ -268,9 +276,14 @@ class loginform_ extends State<loginform> {
                 Row(
                   children: [
                     ElevatedButton(
-                      style: ElevatedButton.styleFrom(primary: Color.fromRGBO(11, 26, 13, 1), padding: EdgeInsets.fromLTRB(0, 10, 10, 10)),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromRGBO(11, 26, 13, 1),
+                          padding: EdgeInsets.fromLTRB(0, 10, 10, 10)),
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => register()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => register()));
                       },
                       child: Text(
                         'Sign Up',
