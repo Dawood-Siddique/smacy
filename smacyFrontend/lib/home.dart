@@ -1,13 +1,27 @@
-// ignore_for_file: non_constant_identifier_names, prefer_const_constructors
+import 'dart:convert';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
-import 'package:smacy/downloadPage.dart';
+import 'package:smacy/MovieScreen.dart';
 import 'package:smacy/widget/poster.dart';
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
+import 'Search.dart';
 import 'models/movie_model.dart';
+import 'package:http/http.dart' as http;
+import 'MovieScreen.dart';
+
+void main(List<String> args) {
+  runApp(
+    MaterialApp(
+      home: Home(
+        userId: 2,
+      ),
+    ),
+  );
+}
 
 class Home extends StatefulWidget {
   final int userId;
@@ -20,27 +34,62 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   int currentindex = 0;
-  List<String> posterList = [];
-
+  var posterList = [];
   List<MovieModel>? movieModel;
-
+  List<Map<int, String>> movieList = [];
   @override
   void initState() {
+    // 1
     posterList.add("picture/notime.jpeg");
     posterList.add("picture/notime.jpeg");
     posterList.add("picture/notime.jpeg");
     posterList.add("picture/notime.jpeg");
     posterList.add("picture/notime.jpeg");
+
+    getBaseUrl();
 
     super.initState();
   }
 
-  final controller = PageController();
+  Future<void> getBaseUrl() async {
+    // 2
+    final response =
+        await http.get(Uri.parse("http://10.0.2.2:8000/homeMovie/"));
+    var decodedJson = jsonDecode(response.body);
+    if (response.statusCode == 200 && decodedJson.isNotEmpty) {
+      for (var i = 0; i < decodedJson.length; i++) {
+        movieList.add({decodedJson[i]['id']: decodedJson[i]['Poster']});
+      }
+    } else {
+      dialog(decodedJson.keys.first, decodedJson.values.first,
+          response.statusCode);
+    }
+    setState(() {});
+  }
+
+  void dialog(String title, String content, int statusCode) {
+    // 2b
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(content),
+            actions: [
+              TextButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
 
   List imageList = [
     "picture/notime.jpeg",
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,10 +141,10 @@ class _HomeState extends State<Home> {
                 options: CarouselOptions(
                   height: 200.0,
                   enlargeCenterPage: true,
-                  autoPlay: true,
+                  autoPlay: false,
                   autoPlayCurve: Curves.fastOutSlowIn,
                   enableInfiniteScroll: true,
-                  autoPlayAnimationDuration: Duration(milliseconds: 1200),
+                  autoPlayAnimationDuration: Duration(milliseconds: 2200),
                 ),
               ),
               Column(
@@ -124,16 +173,6 @@ class _HomeState extends State<Home> {
                             width: 200,
                           ),
                         ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Text(
-                            "See All",
-                            style: TextStyle(
-                              fontSize: 16,
-                              color: Colors.redAccent,
-                            ),
-                          ),
-                        )
                       ],
                     ),
                   ),
@@ -142,20 +181,20 @@ class _HomeState extends State<Home> {
                     child: ListView.separated(
                       padding: EdgeInsets.all(4),
                       scrollDirection: Axis.horizontal,
-                      itemCount: posterList.length,
+                      itemCount: movieList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return GestureDetector(
                           onTap: () {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) =>
-                                      DownloadPage(movieId: 1)),
+                                  builder: (context) => DownloadPage(
+                                      movieId: movieList[index].keys.first,
+                                      userId: widget.userId)),
                             );
                           },
                           child: Poster(
-                            poster: posterList[index],
-                            id: 0,
+                            poster: movieList[index].values.first,
                           ),
                         );
                       },
@@ -218,7 +257,6 @@ class _HomeState extends State<Home> {
                           onTap: () {},
                           child: Poster(
                             poster: posterList[index],
-                            id: 0,
                           ),
                         );
                       },

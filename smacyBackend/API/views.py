@@ -6,6 +6,8 @@ from rest_framework import status
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.db import IntegrityError
+from rest_framework.renderers import JSONRenderer
+from rest_framework.response import Response
 
 # Create your views here.
 
@@ -41,17 +43,25 @@ class userLogin(generics.CreateAPIView):
         except User.DoesNotExist:
             return JsonResponse({'Error': 'Email Do not exsist'}, status=status.HTTP_404_NOT_FOUND)
         except:
-            JsonResponse({'Error': 'Something Went Wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            return JsonResponse({'Error': 'Something Went Wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
         
 
-class moviePoster(generics.ListAPIView):
-    queryset = Movie.objects.values('id', 'Poster').all()
-    serializer_class = UperHomeSerialzer
-    
-class tempSeason(generics.ListAPIView):
-    queryset = Season.objects.all()
-    serializer_class = SeasonSerializer
+class homeMovie(generics.ListAPIView):
+    queryset = Movie.objects.values('id','Poster').order_by('?')[:5]
+    serializer_class = MoviePoster
 
+    
+class homeShow(generics.ListAPIView):
+    queryset = Show.objects.values('id','Poster').order_by('?')[:5]
+    serializer_class = ShowPoster
+
+
+class movieDetail(generics.RetrieveAPIView):
+    queryset = Movie.objects.all()
+    serializer_class = MovieSerializer
+    lookup_field = 'id'
+            
+        
 
 
 # @api_view(['GET', 'POST'])

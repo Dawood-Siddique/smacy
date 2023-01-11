@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('register/', userRegister.as_view()),
     path('login/', userLogin.as_view()),
-    path('uper/', moviePoster.as_view()),
-    path('season/', tempSeason.as_view()),
+    path('homeMovie/', homeMovie.as_view()),
+    path('homeShow/', homeShow.as_view()),
+    path('movieDetail/<int:id>/', movieDetail.as_view()),
 ]
