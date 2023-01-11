@@ -1,19 +1,33 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
 import 'package:smacy/Registratrion.dart';
 import 'package:smacy/VideoPlayer.dart';
 import 'package:smacy/SaveFile.dart';
+import 'Home.dart';
 import 'loginform.dart';
 
 void main() {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    home: loginform(),
-    theme: ThemeData(
-      scaffoldBackgroundColor: const Color.fromRGBO(11, 26, 13, 1),
-      primaryColor: const Color.fromRGBO(173, 225, 0, 1),
-    ),
-  ));
+  runApp(const MyApp());
 }
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        scaffoldBackgroundColor: const Color.fromRGBO(11, 26, 13, 1),
+        primaryColor: const Color.fromRGBO(173, 225, 0, 1),
+      ),
+      home: Home(userId: 11),
+    );
+  }
+}
+
 // 173,225,0 as main color
 // 11,26,13 as background color
 
@@ -83,57 +97,69 @@ class GetStarted extends StatelessWidget {
           )),
           Center(
               child: SingleChildScrollView(
-            child: Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-              SizedBox(
-                height: 600,
-              ),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 127, 232, 28),
-                    elevation: 3,
-                    side: BorderSide(width: 1, color: Color.fromARGB(255, 127, 232, 28)),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                    padding: EdgeInsets.fromLTRB(140, 13, 140, 13)),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => register()));
-                },
-                child: Text(
-                  'Get Started',
-                  style: TextStyle(
-                    color: Colors.black,
-                    fontSize: 19,
-                    fontWeight: FontWeight.bold,
-                    fontFamily: 'Archivo',
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: 600,
                   ),
-                ),
-              ),
-              SizedBox(
-                height: 10,
-              ),
-              Container(
-                margin: EdgeInsets.only(bottom: 80),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(255, 127, 232, 28),
                       elevation: 3,
-                      side: BorderSide(width: 1, color: Color.fromARGB(255, 127, 232, 28)),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
-                      padding: EdgeInsets.fromLTRB(165, 13, 165, 13)),
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => loginform()));
-                  },
-                  child: Text(
-                    'Login',
-                    style: TextStyle(
-                      color: Color.fromARGB(255, 127, 232, 28),
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                      fontFamily: 'Archivo',
+                      side: BorderSide(
+                          width: 1, color: Color.fromARGB(255, 127, 232, 28)),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(5)),
+                      padding: EdgeInsets.fromLTRB(140, 13, 140, 13),
+                    ),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => register()));
+                    },
+                    child: Text(
+                      'Get Started',
+                      style: TextStyle(
+                        color: Colors.black,
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: 'Archivo',
+                      ),
                     ),
                   ),
-                ),
-              ),
-            ]),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(bottom: 80),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          elevation: 3,
+                          side: BorderSide(
+                              width: 1,
+                              color: Color.fromARGB(255, 127, 232, 28)),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(5)),
+                          padding: EdgeInsets.fromLTRB(165, 13, 165, 13)),
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => loginform()));
+                      },
+                      child: Text(
+                        'Login',
+                        style: TextStyle(
+                          color: Color.fromARGB(255, 127, 232, 28),
+                          fontSize: 19,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'Archivo',
+                        ),
+                      ),
+                    ),
+                  ),
+                ]),
           ))
         ],
       ),
