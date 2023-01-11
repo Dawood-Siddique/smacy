@@ -28,7 +28,6 @@ class _VideoState extends State<Video> {
 
   Future<void> videoPathInit() async {
     final localDir = await _getFilePath("video.mp4");
-    print(localDir);
     setState(() {
       file = File(localDir);
     });

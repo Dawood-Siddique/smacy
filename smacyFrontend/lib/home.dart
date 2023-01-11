@@ -4,7 +4,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 import 'dart:ui';
-import 'package:smacy/downloadPage.dart';
+import 'package:smacy/MovieScreen.dart';
 import 'package:smacy/widget/poster.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 import 'Search.dart';

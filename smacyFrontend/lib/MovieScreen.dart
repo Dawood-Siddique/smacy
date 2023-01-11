@@ -1,11 +1,21 @@
-// ignore_for_file: camel_case_types, use_key_in_widget_constructors, prefer_const_constructors
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+
+void main(List<String> args) {
+  runApp(
+    MaterialApp(
+      home: DownloadPage(
+        movieId: 2,
+      ),
+    ),
+  );
+}
 
 class DownloadPage extends StatefulWidget {
   final int movieId;
   const DownloadPage({super.key, required this.movieId});
-
   @override
   State<DownloadPage> createState() => _DownloadPageState();
 }
@@ -13,6 +23,82 @@ class DownloadPage extends StatefulWidget {
 class _DownloadPageState extends State<DownloadPage> {
   bool isVisible = false;
   bool text = false;
+  late String baseUrl;
+  String MovieTitle = "Nan";
+  int ReleaseDate = 0000;
+  String Duration = "0h 0m";
+  String Description = "";
+  double ImdbRating = 0.0;
+  int AgeLimit = 0;
+  String Genre = "";
+  String ImageUrl = "https://drive.google.com/uc?export=download&id=1eqNSloPW5eTMVjAsssviLxjndHvaUzU1";
+  late NetworkImage NetworkFetchedImage;
+  @override
+  void initState() {
+    // 1
+    getUrl(widget.movieId);
+    getMovieDetail();
+    fetchImage();
+    super.initState();
+  }
+
+  void getUrl(int id) {
+    // 2
+    baseUrl = "http://10.0.2.2:8000/movieDetail/$id/";
+  }
+
+  Future<void> getMovieDetail() async {
+    // 3
+    final response = await http.get(Uri.parse(baseUrl));
+    var decodedJson = jsonDecode(response.body);
+    if (response.statusCode == 200 && decodedJson.isNotEmpty) {
+        MovieTitle = decodedJson['MovieTitle'];
+        ReleaseDate = decodedJson['ReleaseDate'];
+        Duration = mintToHour(decodedJson['Duration']);
+        Description = decodedJson['Description'];
+        ImdbRating = decodedJson['ImbdRating'];
+        AgeLimit = decodedJson['AgeLimit'];
+        Genre = decodedJson['Genre'];
+        ImageUrl = decodedJson['Poster'];
+      print(decodedJson);
+    } else {
+      _dialog(decodedJson.keys.first, decodedJson.values.first, response.statusCode);
+    }
+  }
+
+  String mintToHour(int minutes) {
+    // 3a
+    int hour = minutes ~/ 60;
+    int min = minutes % 60;
+    return "${hour}h ${min}m";
+  }
+
+  void _dialog(String title, String content, int statusCode) {
+    // 3b
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text(title),
+            content: Text(content),
+            actions: [
+              TextButton(
+                child: const Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              )
+            ],
+          );
+        });
+  }
+
+  void fetchImage() {
+    // 4
+    setState(() {
+      NetworkFetchedImage = NetworkImage(ImageUrl);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +116,7 @@ class _DownloadPageState extends State<DownloadPage> {
               margin: EdgeInsets.only(top: 10),
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage('picture/notime.jpeg'),
+                  image: NetworkFetchedImage,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -56,12 +142,8 @@ class _DownloadPageState extends State<DownloadPage> {
                   margin: EdgeInsets.fromLTRB(0, 220, 0, 0),
                   padding: EdgeInsets.only(right: 170),
                   child: Text(
-                    'No Time To Die',
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        fontFamily: 'Archivo'),
+                    MovieTitle,
+                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 30, fontFamily: 'Archivo'),
                   ),
                 ),
                 SizedBox(
@@ -74,7 +156,7 @@ class _DownloadPageState extends State<DownloadPage> {
                     ),
                     Container(
                       child: Text(
-                        "2022",
+                        ReleaseDate.toString(),
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -86,14 +168,14 @@ class _DownloadPageState extends State<DownloadPage> {
                       ),
                       padding: EdgeInsets.all(4),
                       child: Text(
-                        "16+",
+                        AgeLimit.toString() + "+",
                         style: TextStyle(color: Colors.white, fontSize: 13),
                       ),
                     ),
                     SizedBox(width: 5),
                     Container(
                       child: Text(
-                        "2h 43m",
+                        Duration,
                         style: TextStyle(color: Colors.white),
                       ),
                     ),
@@ -102,6 +184,9 @@ class _DownloadPageState extends State<DownloadPage> {
                 SizedBox(
                   height: 30,
                 ),
+                SizedBox(
+                  height: 10,
+                ),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
@@ -109,47 +194,7 @@ class _DownloadPageState extends State<DownloadPage> {
                       side: BorderSide(
                         width: 1,
                       ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
-                      padding: EdgeInsets.fromLTRB(140, 10, 140, 10)),
-                  onPressed: () {},
-                  child: Center(
-                    child: Row(
-                      // ignore: prefer_const_literals_to_create_immutables
-                      children: [
-                        SizedBox(
-                          width: 17,
-                        ),
-                        Icon(
-                          Icons.play_arrow,
-                          color: Colors.black,
-                          size: 20,
-                        ),
-                        Text(
-                          'Play',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 19,
-                            fontWeight: FontWeight.bold,
-                            fontFamily: 'Archivo',
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.grey[850],
-                      elevation: 3,
-                      side: BorderSide(
-                        width: 1,
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(5)),
+                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                       padding: EdgeInsets.fromLTRB(140, 10, 140, 10)),
                   onPressed: () {},
                   child: Row(
@@ -163,7 +208,7 @@ class _DownloadPageState extends State<DownloadPage> {
                       Text(
                         'Download',
                         style: TextStyle(
-                          color: Colors.white,
+                          color: Colors.black87,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
                           fontFamily: 'Archivo',
@@ -178,11 +223,8 @@ class _DownloadPageState extends State<DownloadPage> {
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "James Bond has left active service. His peace is short-lived when Felix Leiter, an old friend from the CIA, turns up asking for help, leading Bond onto the trail of a mysterious villain armed with dangerous new technology.",
-                    style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 15.4,
-                        fontWeight: FontWeight.w300),
+                    Description,
+                    style: TextStyle(color: Colors.white, fontSize: 12.4, fontWeight: FontWeight.w300),
                   ),
                 ),
                 SizedBox(height: 10),
@@ -192,18 +234,14 @@ class _DownloadPageState extends State<DownloadPage> {
                     children: [
                       Text(
                         "Cast: Daniel Craig,Rami...",
-                        style: TextStyle(
-                            color: Colors.grey[400],
-                            fontSize: 15.4,
-                            fontWeight: FontWeight.w400),
+                        style: TextStyle(color: Colors.grey[400], fontSize: 15.4, fontWeight: FontWeight.w400),
                       ),
                       OutlinedButton(
                           style: ElevatedButton.styleFrom(
                             primary: Colors.black,
                             padding: EdgeInsets.fromLTRB(0, 10, 25, 10),
                             side: BorderSide(color: Colors.transparent),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(5)),
+                            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(5)),
                           ),
                           onPressed: () {
                             setState(() {
@@ -231,10 +269,7 @@ class _DownloadPageState extends State<DownloadPage> {
                     padding: EdgeInsets.only(right: 200),
                     child: Text(
                       "Director: Cary Joji Fukunaga",
-                      style: TextStyle(
-                          color: Colors.grey[400],
-                          fontSize: 15.4,
-                          fontWeight: FontWeight.w400),
+                      style: TextStyle(color: Colors.grey[400], fontSize: 15.4, fontWeight: FontWeight.w400),
                     )),
               ],
             )
