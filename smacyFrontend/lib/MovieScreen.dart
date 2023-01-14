@@ -2,20 +2,8 @@ import 'dart:convert';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:smacy/DownloadScreen.dart';
-
 import 'home.dart';
-
-void main(List<String> args) {
-  runApp(
-    MaterialApp(
-      home: DownloadPage(
-        movieId: 2,
-        userId: 26,
-      ),
-    ),
-  );
-}
+import 'SaveFile.dart';
 
 class DownloadPage extends StatefulWidget {
   final int movieId;
@@ -37,6 +25,8 @@ class _DownloadPageState extends State<DownloadPage> {
   int AgeLimit = 0;
   String Genre = "";
   String ImageUrl = "https://images.unsplash.com/photo-1607434472257-d9f8e57a643d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2344&q=80";
+  late String downloadLinkUrl;
+  String downloadLink = "";
 
   @override
   void initState() {
@@ -49,6 +39,7 @@ class _DownloadPageState extends State<DownloadPage> {
   void getUrl(int id) {
     // 2
     baseUrl = "http://10.0.2.2:8000/movieDetail/$id/";
+    downloadLinkUrl = "http://10.0.2.2:8000/movieDownloadLink/$id/";
   }
 
   Future<void> getMovieDetail() async {
@@ -67,6 +58,13 @@ class _DownloadPageState extends State<DownloadPage> {
       setState(() {});
     } else {
       dialog(decodedJson.keys.first, decodedJson.values.first, response.statusCode);
+    }
+    final downloadLinkResponse = await http.get(Uri.parse(downloadLinkUrl));
+    var downloadLinkDecodedJson = jsonDecode(downloadLinkResponse.body);
+    if (downloadLinkResponse.statusCode == 200 && downloadLinkDecodedJson.isNotEmpty) {
+      downloadLink = downloadLinkDecodedJson['DownloadLink'];
+    } else {
+      dialog(downloadLinkDecodedJson.keys.first, downloadLinkDecodedJson.values.first, downloadLinkResponse.statusCode);
     }
   }
 
@@ -199,8 +197,11 @@ class _DownloadPageState extends State<DownloadPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => DownloadScreen(
-                                  userId: widget.userId, 
+                            builder: (context) => Install(
+                                  fileName: MovieTitle,
+                                  userId: widget.userId,
+                                  movieId: widget.movieId,
+                                  downloadLink: downloadLink,
                                 )));
                   },
                   child: Row(
@@ -239,7 +240,7 @@ class _DownloadPageState extends State<DownloadPage> {
                   child: Row(
                     children: [
                       Text(
-                        "Cast: Daniel Craig,Rami...",
+                        "Cast: ",
                         style: TextStyle(color: Colors.grey[400], fontSize: 15.4, fontWeight: FontWeight.w400),
                       ),
                     ],

@@ -25,4 +25,6 @@ urlpatterns = [
     path('homeShow/', homeShow.as_view()),
     path('movieDetail/<int:id>/', movieDetail.as_view()),
     path('userMovieDownload/', UserDownloadedMovieSave.as_view()),
+    path('getDownloadedMovie/<int:userId>/', UserDownloadedMovieRetrieve.as_view()),
+    path('movieDownloadLink/<int:movieId>/', MovieDownloadLinkGetter.as_view()),
 ]

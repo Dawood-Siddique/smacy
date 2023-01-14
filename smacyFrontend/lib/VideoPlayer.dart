@@ -3,14 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:video_player/video_player.dart';
 
-void main() {
-  runApp(const MaterialApp(
-    home: Video(),
-  ));
-}
-
 class Video extends StatefulWidget {
-  const Video({super.key});
+  String movieTitle;
+  Video({super.key, required this.movieTitle});
 
   @override
   State<Video> createState() => _VideoState();
@@ -27,7 +22,7 @@ class _VideoState extends State<Video> {
   }
 
   Future<void> videoPathInit() async {
-    final localDir = await _getFilePath("video.mp4");
+    final localDir = await _getFilePath(widget.movieTitle);
     setState(() {
       file = File(localDir);
     });

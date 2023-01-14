@@ -56,7 +56,7 @@ class _downloadDialogState extends State<downloadDialog> {
     ).then((_) {
         Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Video()),
+        MaterialPageRoute(builder: (context) => Video(movieTitle: 'video.mp4')),
       );
     });
   }

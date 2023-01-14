@@ -6,8 +6,8 @@ from rest_framework import status
 from django.http import JsonResponse
 from django.contrib.auth.models import User
 from django.db import IntegrityError
-from rest_framework.renderers import JSONRenderer
-from rest_framework.response import Response
+from rest_framework import viewsets
+from .models import *
 
 # Create your views here.
 
@@ -62,15 +62,32 @@ class movieDetail(generics.RetrieveAPIView):
     lookup_field = 'id'
 
 class UserDownloadedMovieSave(generics.CreateAPIView):
-    def post(self, request):
+    queryset = UserMovieDownloaded.objects.all()
+    serializer_class = UserDownloadMovieSaveSerializer
+
+class UserDownloadedMovieRetrieve(generics.RetrieveAPIView):
+    serializer_class = UserDownloadMovieSerializer
+    def retrieve(self, request, userId):
         try:
-            serializer = UserDownloadMovieSerializer(data=request.data) 
-            if serializer.is_valid():
-                serializer.save()
-                return JsonResponse({'Success': 'User Downloaded Movie Saved'}, status=status.HTTP_201_CREATED)
+            user = User.objects.get(id=userId)
+            userDownloadedMovie = UserMovieDownloaded.objects.filter(UserId=userId)
+            serializer = UserDownloadMovieSerializer(userDownloadedMovie, many=True)
+            return JsonResponse(serializer.data, safe=False)
         except:
             return JsonResponse({'Error': 'Something Went Wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
+class MovieDownloadLinkGetter(generics.RetrieveAPIView):
+    serializers_class = MovieDownloadLinkSerializer
+    def retrieve(self, request, movieId):
+        try:
+            movie = Movie.objects.get(id=movieId)
+            downloadLink = MovieDownloadLink.objects.get(MovieId=movie)
+            serializer = MovieDownloadLinkSerializer(downloadLink)
+            return JsonResponse(serializer.data, safe=False)
+        except:
+            return JsonResponse({'Error': 'Something Went Wrong'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+    
 # @api_view(['GET', 'POST'])
 # def songList(request):
 #     if request.method == 'GET':

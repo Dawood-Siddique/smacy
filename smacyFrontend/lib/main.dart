@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
         scaffoldBackgroundColor: const Color.fromRGBO(11, 26, 13, 1),
         primaryColor: const Color.fromRGBO(173, 225, 0, 1),
       ),
-      home: Home(userId: 11),
+      home: GetStarted(),
     );
   }
 }

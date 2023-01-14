@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -8,13 +7,12 @@ import 'package:smacy/MovieScreen.dart';
 import 'package:smacy/widget/poster.dart';
 import 'models/movie_model.dart';
 import 'package:http/http.dart' as http;
-import 'MovieScreen.dart';
 
 void main(List<String> args) {
   runApp(
     MaterialApp(
       home: Home(
-        userId: 2,
+        userId: 26,
       ),
     ),
   );
@@ -34,15 +32,23 @@ class _HomeState extends State<Home> {
   var posterList = [];
   List<MovieModel>? movieModel;
   List<Map<int, String>> movieList = [];
+  // movieList = [
+//     {
+//         "id": 5,
+//         "Poster": "https://drive.google.com/uc?export=download&id=1-hQh3YdLKMSiuB84mrqGZJg__DTwoovm"
+//     },
+//     {
+//         "id": 7,
+//         "Poster": "https://drive.google.com/uc?export=download&id=1xzFVEupPKv15tMkvCIOwGlgFBv1cxrzH"
+//     },
+//     {
+//         "id": 6,
+//         "Poster": "https://drive.google.com/uc?export=download&id=1DplaWf3geuxD-VtRSwHSGgAd4zXpALLu"
+//     }
+// ]
   @override
   void initState() {
     // 1
-    posterList.add("picture/notime.jpeg");
-    posterList.add("picture/notime.jpeg");
-    posterList.add("picture/notime.jpeg");
-    posterList.add("picture/notime.jpeg");
-    posterList.add("picture/notime.jpeg");
-
     getBaseUrl();
 
     super.initState();

@@ -63,7 +63,7 @@ class search_ extends State<search> {
               Row(
                 children: [
                   Text(
-                    "Genres",
+                    "Genre",
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 20,
